@@ -10,7 +10,7 @@ function Sabato({ tornaIndietro }) {
     if (!totale || persone < 1) return alert("Inserisci un totale valido e almeno 1 persona.");
     
     try {
-      const response = await fetch("http://192.168.1.8/api/sabato/dividi", {
+      const response = await fetch("https://learnis-caserta-pappa-e-ciccia-backend.onrender.com/api/sabato/dividi", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ totale_conto: parseFloat(totale), numero_persone: parseInt(persone) })

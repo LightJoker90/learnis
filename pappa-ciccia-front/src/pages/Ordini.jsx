@@ -16,7 +16,7 @@ function Ordini({ tornaIndietro }) {
     formData.append("file", file); // Deve chiamarsi "file" come nel backend Python
 
     try {
-      const response = await fetch("http://192.168.1.8/api/ordini/upload", {
+      const response = await fetch("https://learnis-caserta-pappa-e-ciccia-backend.onrender.com/api/ordini/upload", {
         method: "POST",
         body: formData,
       });
