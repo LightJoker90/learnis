@@ -56,7 +56,7 @@ def estrai_nomi_domenica(cella):
 # INTERFACCIA WEB (STREAMLIT)
 # ==========================================
 
-st.set_page_config(page_title="Gestione Ordini", page_icon="🍔", layout="centered")
+st.set_page_config(page_title="Gestione Ordini", page_icon="logo.jpeg", layout="centered")
 
 # Personalizzazione dell'interfaccia con modifiche CSS per nascondere elementi non necessari e adattare il tema scuro
 # Nasconde la sfumatura bianca in alto e colora lo sfondo
