@@ -1,4 +1,5 @@
 import streamlit as st
+import streamlit.components.v1 as components
 import pandas as pd
 from collections import Counter
 import re
@@ -58,28 +59,47 @@ def estrai_nomi_domenica(cella):
 st.set_page_config(page_title="Gestione Ordini", page_icon="🍔", layout="centered")
 
 # Personalizzazione dell'interfaccia con modifiche CSS per nascondere elementi non necessari e adattare il tema scuro
-ui_tweaks = """
-<!-- Forza la barra di stato dell'iPhone ad adattarsi al tema scuro -->
-<meta name="theme-color" content="#0e1117">
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+# 1. CSS Aggressivo per nascondere header, footer e rimuovere lo spazio bianco in alto
+st.markdown("""
+    <style>
+    [data-testid="stHeader"] {display: none !important;}
+    footer {display: none !important;}
+    .stApp {background-color: #0e1117 !important;}
+    /* Rimuove lo spazio vuoto lasciato dall'header in alto */
+    .block-container {padding-top: 1rem !important;} 
+    </style>
+""", unsafe_allow_html=True)
 
-<style>
-/* Nasconde l'hamburger menu in alto a destra */
-[data-testid="stToolbar"] {display: none !important;}
+# 2. JavaScript per eliminare il "Manage app" e sistemare la barra di Safari
+components.html(
+    """
+    <script>
+    // Accede alla pagina principale fuori dalle restrizioni di Streamlit
+    const parentDoc = window.parent.document;
 
-/* Nasconde il footer predefinito */
-footer {display: none !important;}
+    // Trova e nasconde forzatamente il badge "Manage app"
+    const badges = parentDoc.querySelectorAll('div[class^="viewerBadge"]');
+    badges.forEach(badge => badge.style.display = 'none');
 
-/* Nasconde il bottone "Manage app" in basso a destra */
-.viewerBadge_container {display: none !important;}
-
-/* Forza il colore di sfondo scuro per l'intera app, eliminando i bordi bianchi */
-.stApp {
-    background-color: #0e1117 !important;
-}
-</style>
-"""
-st.markdown(ui_tweaks, unsafe_allow_html=True)
+    // Inserisce i codici per colorare di nero la barra dell'iPhone in cima assoluta (nell'Head)
+    if (!parentDoc.querySelector('meta[name="theme-color"]')) {
+        const metaTheme = parentDoc.createElement('meta');
+        metaTheme.name = "theme-color";
+        metaTheme.content = "#0e1117";
+        parentDoc.head.appendChild(metaTheme);
+    }
+    
+    if (!parentDoc.querySelector('meta[name="apple-mobile-web-app-status-bar-style"]')) {
+        const metaApple = parentDoc.createElement('meta');
+        metaApple.name = "apple-mobile-web-app-status-bar-style";
+        metaApple.content = "black-translucent";
+        parentDoc.head.appendChild(metaApple);
+    }
+    </script>
+    """,
+    height=0,
+    width=0,
+)
 
 
 st.title("🍔 Pappa e Ciccia - Gestione Ordini")
