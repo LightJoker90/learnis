@@ -69,21 +69,26 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 # Inietta il logo personalizzato e il tema scuro per l'iPhone
+# Inietta il logo personalizzato distruggendo quello di Streamlit
 components.html(
     """
     <script>
     const parentDoc = window.parent.document;
     
-    // Imposta il logo per la schermata Home di iOS
-    if (!parentDoc.querySelector('link[rel="apple-touch-icon"]')) {
-        const linkIcon = parentDoc.createElement('link');
-        linkIcon.rel = 'apple-touch-icon';
-        // Sostituisci questo link con l'URL grezzo del tuo logo caricato su GitHub
-        linkIcon.href = 'https://raw.githubusercontent.com/LightJoker90/learnis/main/logo.jpeg';
-        parentDoc.head.appendChild(linkIcon);
-    }
+    // 1. Cerca e distrugge tutte le icone predefinite di Streamlit
+    const iconeVecchie = parentDoc.querySelectorAll('link[rel="apple-touch-icon"], link[rel="shortcut icon"], link[rel="icon"]');
+    iconeVecchie.forEach(icona => icona.remove());
 
-    // Colora la barra della batteria e dell'orario di scuro
+    // 2. Forza iOS a caricare il tuo logo JPEG
+    const linkIcon = parentDoc.createElement('link');
+    linkIcon.rel = 'apple-touch-icon';
+    
+    // INCOLLA QUI IL TUO LINK RAW AL POSTO DI QUESTO
+    linkIcon.href = 'https://raw.githubusercontent.com/LightJoker90/learnis/main/logo.jpeg'; 
+    
+    parentDoc.head.appendChild(linkIcon);
+
+    // 3. Colora la barra di sistema dell'iPhone
     if (!parentDoc.querySelector('meta[name="theme-color"]')) {
         const metaTheme = parentDoc.createElement('meta');
         metaTheme.name = "theme-color";
