@@ -93,7 +93,7 @@ function Checklist({ tornaIndietro }) {
       <div style={{ marginBottom: '25px' }}>
         <label style={stileRiga('dom1')}><input type="checkbox" checked={spunte.dom1} onChange={() => toggleSpunta('dom1')} style={stileCheckbox} /> Inviare mail a Trattoria Caprese per i menu</label>
         <label style={stileRiga('dom2')}><input type="checkbox" checked={spunte.dom2} onChange={() => toggleSpunta('dom2')} style={stileCheckbox} /> Raccogliere i soldi di tutti</label>
-        <label style={stileRiga('dom3')}><input type="checkbox" checked={spunte.dom3} onChange={() => toggleSpunta('dom3')} style={stileCheckbox} /> Chiamata a Trattoria Caprese per avviare la comanda (20 minuti prima di arrivare)</label>
+        <label style={stileRiga('dom3')}><input type="checkbox" checked={spunte.dom3} onChange={() => toggleSpunta('dom3')} style={stileCheckbox} /> Chiamata a Trattoria Caprese per avviare la comanda</label>
       </div>
     </div>
   );
