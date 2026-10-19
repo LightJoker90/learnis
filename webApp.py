@@ -59,41 +59,36 @@ def estrai_nomi_domenica(cella):
 st.set_page_config(page_title="Gestione Ordini", page_icon="🍔", layout="centered")
 
 # Personalizzazione dell'interfaccia con modifiche CSS per nascondere elementi non necessari e adattare il tema scuro
-# 1. CSS Aggressivo per nascondere header, footer e rimuovere lo spazio bianco in alto
+# Nasconde la sfumatura bianca in alto e colora lo sfondo
 st.markdown("""
     <style>
     [data-testid="stHeader"] {display: none !important;}
-    footer {display: none !important;}
     .stApp {background-color: #0e1117 !important;}
-    /* Rimuove lo spazio vuoto lasciato dall'header in alto */
     .block-container {padding-top: 1rem !important;} 
     </style>
 """, unsafe_allow_html=True)
 
-# 2. JavaScript per eliminare il "Manage app" e sistemare la barra di Safari
+# Inietta il logo personalizzato e il tema scuro per l'iPhone
 components.html(
     """
     <script>
-    // Accede alla pagina principale fuori dalle restrizioni di Streamlit
     const parentDoc = window.parent.document;
+    
+    // Imposta il logo per la schermata Home di iOS
+    if (!parentDoc.querySelector('link[rel="apple-touch-icon"]')) {
+        const linkIcon = parentDoc.createElement('link');
+        linkIcon.rel = 'apple-touch-icon';
+        // Sostituisci questo link con l'URL grezzo del tuo logo caricato su GitHub
+        linkIcon.href = 'https://raw.githubusercontent.com/LightJoker90/learnis/main/logo.png';
+        parentDoc.head.appendChild(linkIcon);
+    }
 
-    // Trova e nasconde forzatamente il badge "Manage app"
-    const badges = parentDoc.querySelectorAll('div[class^="viewerBadge"]');
-    badges.forEach(badge => badge.style.display = 'none');
-
-    // Inserisce i codici per colorare di nero la barra dell'iPhone in cima assoluta (nell'Head)
+    // Colora la barra della batteria e dell'orario di scuro
     if (!parentDoc.querySelector('meta[name="theme-color"]')) {
         const metaTheme = parentDoc.createElement('meta');
         metaTheme.name = "theme-color";
         metaTheme.content = "#0e1117";
         parentDoc.head.appendChild(metaTheme);
-    }
-    
-    if (!parentDoc.querySelector('meta[name="apple-mobile-web-app-status-bar-style"]')) {
-        const metaApple = parentDoc.createElement('meta');
-        metaApple.name = "apple-mobile-web-app-status-bar-style";
-        metaApple.content = "black-translucent";
-        parentDoc.head.appendChild(metaApple);
     }
     </script>
     """,
