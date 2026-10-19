@@ -16,7 +16,6 @@ function Ordini({ tornaIndietro }) {
     formData.append("file", file);
 
     try {
-      // Assicurati che questo link sia quello corretto generato da Render
       const response = await fetch("https://learnis-caserta-pappa-e-ciccia-backend.onrender.com/api/ordini/upload", {
         method: "POST",
         body: formData,
@@ -52,26 +51,85 @@ function Ordini({ tornaIndietro }) {
     );
   };
 
+  // Determina quale icona mostrare in base all'estensione del file
+  const iconaFile = file && file.name.endsWith('.csv') ? '📄' : '📊';
+
   return (
     <div style={{ paddingBottom: '40px' }}>
       <button className="btn-back" onClick={tornaIndietro}>⬅️ Torna alla Home</button>
       <h2>📊 Trascrizione Ordini</h2>
-      <p style={{ color: '#888', marginBottom: '20px' }}>Carica il file Excel o CSV e genera i riepiloghi.</p>
+      <p style={{ color: '#888', marginBottom: '25px' }}>Carica il file Excel o CSV e genera i riepiloghi.</p>
 
+      {/* IL VERO INPUT DI SISTEMA (Nascosto) */}
       <input 
+        id="upload-nascosto"
         type="file" 
         accept=".xlsx, .csv" 
-        onChange={(e) => setFile(e.target.files[0])} 
-        style={{ marginBottom: '20px', width: '100%', padding: '10px', backgroundColor: '#1e2329', borderRadius: '10px' }}
+        style={{ display: 'none' }}
+        onClick={(e) => e.target.value = null} // Permette di ricaricare lo stesso file se serve
+        onChange={(e) => {
+          if(e.target.files.length > 0) {
+            setFile(e.target.files[0]);
+            setRisultato(null); // Nasconde i vecchi risultati quando si sceglie un nuovo file
+            setErrore(null);
+          }
+        }} 
       />
 
-      <button className="btn-menu btn-primary" onClick={gestisciUpload} disabled={caricamento}>
+      {/* LOGICA DI VISUALIZZAZIONE DEL BOX FILE */}
+      {!file ? (
+        /* STATO 1: Nessun file selezionato (Box tratteggiato grande) */
+        <label htmlFor="upload-nascosto" style={{
+          display: 'block', padding: '35px 20px', textAlign: 'center',
+          backgroundColor: '#1e2329', border: '2px dashed #2e6bc6', borderRadius: '15px',
+          cursor: 'pointer', marginBottom: '25px', transition: '0.2s'
+        }}>
+          <div style={{ fontSize: '45px', marginBottom: '10px' }}>📂</div>
+          <p style={{ margin: 0, fontWeight: 'bold', fontSize: '18px', color: '#2e6bc6' }}>Tocca qui per scegliere il file</p>
+          <p style={{ margin: '5px 0 0 0', fontSize: '13px', color: '#888' }}>Supporta .xlsx e .csv</p>
+        </label>
+      ) : (
+        /* STATO 2: File selezionato (Card elegante con bottone sostituisci) */
+        <div style={{
+          display: 'flex', alignItems: 'center', justifyContent: 'space-between',
+          padding: '15px 20px', backgroundColor: '#1c1c1e', border: '1px solid #333',
+          borderRadius: '15px', marginBottom: '25px', boxShadow: '0 4px 15px rgba(0,0,0,0.2)'
+        }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '15px', overflow: 'hidden' }}>
+            <span style={{ fontSize: '35px' }}>{iconaFile}</span>
+            <div style={{ overflow: 'hidden' }}>
+              <p style={{ fontSize: '11px', color: '#888', marginBottom: '2px', textTransform: 'uppercase', fontWeight: 'bold', letterSpacing: '0.5px' }}>
+                File scelto
+              </p>
+              {/* Il file name viene troncato se è troppo lungo per lo schermo dell'iPhone */}
+              <p style={{ fontWeight: 'bold', color: 'white', margin: 0, fontSize: '16px', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis', maxWidth: '180px' }}>
+                {file.name}
+              </p>
+            </div>
+          </div>
+          
+          <label htmlFor="upload-nascosto" style={{
+            backgroundColor: '#3a3a3c', padding: '10px 15px', borderRadius: '12px',
+            color: 'white', fontSize: '14px', cursor: 'pointer', fontWeight: 'bold', flexShrink: 0
+          }}>
+            Sostituisci
+          </label>
+        </div>
+      )}
+
+      {/* BOTTONE CALCOLA (Si attiva solo se c'è un file) */}
+      <button 
+        className="btn-menu btn-primary" 
+        onClick={gestisciUpload} 
+        disabled={caricamento || !file}
+        style={{ opacity: (!file || caricamento) ? 0.5 : 1 }}
+      >
         {caricamento ? "Elaborazione in corso..." : "Calcola Totali"}
       </button>
 
       {errore && <p style={{ color: '#ff4d4d', marginTop: '10px', fontWeight: 'bold' }}>{errore}</p>}
 
-      {/* --- SEZIONE RISULTATI --- */}
+      {/* --- SEZIONE RISULTATI (Rimasta identica a prima) --- */}
       {risultato && (
         <div style={{ marginTop: '30px' }}>
           
