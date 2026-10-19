@@ -65,25 +65,35 @@ function Checklist({ tornaIndietro }) {
         Breve descrizione delle attività in programma. Si resetta in automatico il prossimo weekend!
       </p>
 
+      {/* Mercoledì */}
+      <h3 style={{ color: '#2e6bc6', marginBottom: '15px', borderBottom: '1px solid #333', paddingBottom: '5px' }}>Mercoledì</h3>
+      <div style={{ marginBottom: '25px' }}>
+        <label style={stileRiga('mer1')}><input type="checkbox" checked={spunte.mer1} onChange={() => toggleSpunta('mer1')} style={stileCheckbox} /> Chiamare Pizzart</label>
+        <label style={stileRiga('mer2')}><input type="checkbox" checked={spunte.mer2} onChange={() => toggleSpunta('mer2')} style={stileCheckbox} /> Chiamare Trattoria Caprese</label>
+      </div>
+
+      {/* Giovedì */}
+      <h3 style={{ color: '#2e6bc6', marginBottom: '15px', borderBottom: '1px solid #333', paddingBottom: '5px' }}>Giovedì</h3>
+      <div style={{ marginBottom: '25px' }}>
+        <label style={stileRiga('gio1')}><input type="checkbox" checked={spunte.gio1} onChange={() => toggleSpunta('gio1')} style={stileCheckbox} /> Mandare messaggio a Martucci</label>
+        <label style={stileRiga('gio2')}><input type="checkbox" checked={spunte.gio2} onChange={() => toggleSpunta('gio2')} style={stileCheckbox} /> Chiamata con Buddy per gestione Google Moduli e sveglie</label>
+      </div>
+
       {/* Venerdì */}
       <h3 style={{ color: '#2e6bc6', marginBottom: '15px', borderBottom: '1px solid #333', paddingBottom: '5px' }}>Venerdì</h3>
       <div style={{ marginBottom: '25px' }}>
-        <label style={stileRiga('ven1')}><input type="checkbox" checked={spunte.ven1} onChange={() => toggleSpunta('ven1')} style={stileCheckbox} /> Raccogliere conferme presenze</label>
-        <label style={stileRiga('ven2')}><input type="checkbox" checked={spunte.ven2} onChange={() => toggleSpunta('ven2')} style={stileCheckbox} /> Comprare bibite e stuzzichini</label>
-      </div>
-
-      {/* Sabato */}
-      <h3 style={{ color: '#2e6bc6', marginBottom: '15px', borderBottom: '1px solid #333', paddingBottom: '5px' }}>Sabato</h3>
-      <div style={{ marginBottom: '25px' }}>
-        <label style={stileRiga('sab1')}><input type="checkbox" checked={spunte.sab1} onChange={() => toggleSpunta('sab1')} style={stileCheckbox} /> Inviare file excel aggiornato</label>
-        <label style={stileRiga('sab2')}><input type="checkbox" checked={spunte.sab2} onChange={() => toggleSpunta('sab2')} style={stileCheckbox} /> Prenotare tavoli / ritiro asporto</label>
+        <label style={stileRiga('ven1')}><input type="checkbox" checked={spunte.ven1} onChange={() => toggleSpunta('ven1')} style={stileCheckbox} /> Invia Google Form sul gruppo Allievi</label>
+        <label style={stileRiga('ven2')}><input type="checkbox" checked={spunte.ven2} onChange={() => toggleSpunta('ven2')} style={stileCheckbox} /> Intervento alla prima pausa per far compilare il questionario</label>
+        <label style={stileRiga('ven3')}><input type="checkbox" checked={spunte.ven3} onChange={() => toggleSpunta('ven3')} style={stileCheckbox} /> Messaggio a Martucci per confermare il menu</label>
+        <label style={stileRiga('ven4')}><input type="checkbox" checked={spunte.ven4} onChange={() => toggleSpunta('ven4')} style={stileCheckbox} /> Chiamata a Pizzart per il numero preciso di persone al tavolo</label>
       </div>
 
       {/* Domenica */}
       <h3 style={{ color: '#2e6bc6', marginBottom: '15px', borderBottom: '1px solid #333', paddingBottom: '5px' }}>Domenica</h3>
       <div style={{ marginBottom: '25px' }}>
-        <label style={stileRiga('dom1')}><input type="checkbox" checked={spunte.dom1} onChange={() => toggleSpunta('dom1')} style={stileCheckbox} /> Inviare ordini Domenica</label>
-        <label style={stileRiga('dom2')}><input type="checkbox" checked={spunte.dom2} onChange={() => toggleSpunta('dom2')} style={stileCheckbox} /> Saldare i conti in sospeso</label>
+        <label style={stileRiga('dom1')}><input type="checkbox" checked={spunte.dom1} onChange={() => toggleSpunta('dom1')} style={stileCheckbox} /> Inviare mail a Trattoria Caprese per i menu</label>
+        <label style={stileRiga('dom2')}><input type="checkbox" checked={spunte.dom2} onChange={() => toggleSpunta('dom2')} style={stileCheckbox} /> Raccogliere i soldi di tutti</label>
+        <label style={stileRiga('dom3')}><input type="checkbox" checked={spunte.dom3} onChange={() => toggleSpunta('dom3')} style={stileCheckbox} /> Chiamata a Trattoria Caprese per avviare la comanda (20 minuti prima di arrivare)</label>
       </div>
     </div>
   );
