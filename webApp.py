@@ -10,7 +10,7 @@ import re
 st.set_page_config(page_title="Gestionale Pappa e Ciccia", page_icon="logo.jpeg", layout="centered")
 
 # Sostituisci #0e1117 con il codice HEX esatto dello sfondo del tuo logo
-COLORE_SFONDO = "#24385f" 
+COLORE_SFONDO = "#222738" 
 
 # CSS Avanzato per iPhone, colori personalizzati e bottoni grandi
 st.markdown(f"""
