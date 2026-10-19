@@ -57,19 +57,29 @@ def estrai_nomi_domenica(cella):
 
 st.set_page_config(page_title="Gestione Ordini", page_icon="🍔", layout="centered")
 
-hide_streamlit_style = """
+# Personalizzazione dell'interfaccia con modifiche CSS per nascondere elementi non necessari e adattare il tema scuro
+ui_tweaks = """
+<!-- Forza la barra di stato dell'iPhone ad adattarsi al tema scuro -->
+<meta name="theme-color" content="#0e1117">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
 <style>
 /* Nasconde l'hamburger menu in alto a destra */
-#MainMenu {visibility: hidden;}
+[data-testid="stToolbar"] {display: none !important;}
 
-/* Nasconde il footer 'Made with Streamlit' */
-footer {visibility: hidden;}
+/* Nasconde il footer predefinito */
+footer {display: none !important;}
 
-/* Nasconde l'header e il tasto deploy se presenti */
-header {visibility: hidden;}
+/* Nasconde il bottone "Manage app" in basso a destra */
+.viewerBadge_container {display: none !important;}
+
+/* Forza il colore di sfondo scuro per l'intera app, eliminando i bordi bianchi */
+.stApp {
+    background-color: #0e1117 !important;
+}
 </style>
 """
-st.markdown(hide_streamlit_style, unsafe_allow_html=True)
+st.markdown(ui_tweaks, unsafe_allow_html=True)
 
 
 st.title("🍔 Pappa e Ciccia - Gestione Ordini")
