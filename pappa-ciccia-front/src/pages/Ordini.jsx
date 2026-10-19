@@ -16,7 +16,7 @@ function Ordini({ tornaIndietro }) {
     formData.append("file", file);
 
     try {
-      // Sostituisci questo link con il tuo URL esatto di Render se l'hai cambiato
+      // Assicurati che questo link sia quello corretto generato da Render
       const response = await fetch("https://learnis-caserta-pappa-e-ciccia-backend.onrender.com/api/ordini/upload", {
         method: "POST",
         body: formData,
@@ -33,11 +33,9 @@ function Ordini({ tornaIndietro }) {
     }
   };
 
-  // --- FUNZIONE DI SUPPORTO PER DISEGNARE LE LISTE ---
-  // Prende un dizionario {"Pizza": 2, "Coca": 1} e lo trasforma in un bell'elenco HTML
   const renderElencoPiatti = (dizionario, titolo) => {
     const voci = Object.entries(dizionario);
-    if (voci.length === 0) return null; // Se non ci sono ordini di quel tipo, non stampa nulla
+    if (voci.length === 0) return null;
 
     return (
       <div style={{ marginBottom: '15px' }}>
@@ -103,17 +101,33 @@ function Ordini({ tornaIndietro }) {
             {renderElencoPiatti(risultato.domenica.bevande, "Bevande")}
           </div>
 
-          {/* CARD DETTAGLIO CLIENTI E QUOTE */}
-          <div style={{ backgroundColor: '#1e2329', padding: '20px', borderRadius: '15px', marginBottom: '20px', border: '1px solid #333' }}>
-            <h3 style={{ borderBottom: '1px solid #333', paddingBottom: '10px', marginBottom: '15px' }}>👤 Dettaglio Quote (Sabato)</h3>
-            {risultato.dettaglio_clienti.sabato.map((cliente, index) => (
-              <div key={index} style={{ marginBottom: '10px', paddingBottom: '10px', borderBottom: '1px dashed #444' }}>
-                <p style={{ fontWeight: 'bold', fontSize: '16px' }}>{cliente.nome}</p>
-                <p style={{ color: '#aaa', fontSize: '14px' }}>{cliente.ordini.join(" + ")}</p>
-                <p style={{ color: '#4caf50', fontWeight: 'bold' }}>Quota: {cliente.prezzo.toFixed(2)} €</p>
-              </div>
-            ))}
-          </div>
+          {/* CARD DETTAGLIO QUOTE SABATO */}
+          {risultato.dettaglio_clienti.sabato.length > 0 && (
+            <div style={{ backgroundColor: '#1e2329', padding: '20px', borderRadius: '15px', marginBottom: '20px', border: '1px solid #333' }}>
+              <h3 style={{ borderBottom: '1px solid #333', paddingBottom: '10px', marginBottom: '15px' }}>👤 Dettaglio Quote (Sabato)</h3>
+              {risultato.dettaglio_clienti.sabato.map((cliente, index) => (
+                <div key={`sab-${index}`} style={{ marginBottom: '10px', paddingBottom: '10px', borderBottom: '1px dashed #444' }}>
+                  <p style={{ fontWeight: 'bold', fontSize: '16px' }}>{cliente.nome}</p>
+                  <p style={{ color: '#aaa', fontSize: '14px' }}>{cliente.ordini.join(" + ")}</p>
+                  <p style={{ color: '#4caf50', fontWeight: 'bold' }}>Quota: {cliente.prezzo.toFixed(2)} €</p>
+                </div>
+              ))}
+            </div>
+          )}
+
+          {/* CARD DETTAGLIO QUOTE DOMENICA */}
+          {risultato.dettaglio_clienti.domenica.length > 0 && (
+            <div style={{ backgroundColor: '#1e2329', padding: '20px', borderRadius: '15px', marginBottom: '20px', border: '1px solid #333' }}>
+              <h3 style={{ borderBottom: '1px solid #333', paddingBottom: '10px', marginBottom: '15px' }}>👤 Dettaglio Quote (Domenica)</h3>
+              {risultato.dettaglio_clienti.domenica.map((cliente, index) => (
+                <div key={`dom-${index}`} style={{ marginBottom: '10px', paddingBottom: '10px', borderBottom: '1px dashed #444' }}>
+                  <p style={{ fontWeight: 'bold', fontSize: '16px' }}>{cliente.nome}</p>
+                  <p style={{ color: '#aaa', fontSize: '14px' }}>{cliente.ordini.join(" + ")}</p>
+                  <p style={{ color: '#4caf50', fontWeight: 'bold' }}>Quota: {cliente.prezzo.toFixed(2)} €</p>
+                </div>
+              ))}
+            </div>
+          )}
 
         </div>
       )}
