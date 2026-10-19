@@ -6,7 +6,7 @@ import Checklist from './pages/Checklist';
 import Feedback from './pages/Feedback';
 
 // --- IMPOSTA QUI LA DATA DEL PROSSIMO CORSO ---
-const DATA_PROSSIMO_CORSO = new Date("2026-11-14T09:00:00");
+const DATA_PROSSIMO_CORSO = new Date("2026-11-13T15:00:00");
 
 function App() {
   const [paginaCorrente, setPaginaCorrente] = useState('home');
