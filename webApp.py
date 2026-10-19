@@ -79,7 +79,7 @@ components.html(
         const linkIcon = parentDoc.createElement('link');
         linkIcon.rel = 'apple-touch-icon';
         // Sostituisci questo link con l'URL grezzo del tuo logo caricato su GitHub
-        linkIcon.href = 'https://raw.githubusercontent.com/LightJoker90/learnis/main/logo.png';
+        linkIcon.href = 'https://raw.githubusercontent.com/LightJoker90/learnis/main/logo.jpeg';
         parentDoc.head.appendChild(linkIcon);
     }
 
