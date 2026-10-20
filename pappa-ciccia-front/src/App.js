@@ -67,16 +67,16 @@ function App() {
           {/* 2. LOGO E TITOLO (Rivisitati) */}
           <div style={{ marginBottom: '40px' }}>
             <img src="/logo.jpeg" alt="Logo" style={{ 
-              width: '110px', 
+              width: '190px', 
               borderRadius: '25px', 
               marginBottom: '15px',
               boxShadow: '0 10px 25px rgba(0,0,0,0.5)' // Dà profondità al logo
             }} />
             <h1 style={{ marginBottom: '2px', fontSize: '26px', fontWeight: '800', letterSpacing: '-0.5px' }}>
-              Gestionale
+              La casa del team Pappa e Ciccia 
             </h1>
             <h2 style={{ fontSize: '18px', fontWeight: '500', color: '#8e8e93' }}>
-              Pappa e Ciccia
+              In questa app trovi tutto ciò che ti serve per il weekend del corso, dalla check-list alla trascrizione degli ordini, fino al feedback finale!
             </h2>
           </div>
 
